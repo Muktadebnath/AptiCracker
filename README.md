@@ -6,31 +6,8 @@ Dashboard name: **Mission 15lpa**. Plan starts **Tuesday, 22 September 2026**, 2
 
 ---
 
-## 1. Setup & running it
 
-Requirements: [Node.js](https://nodejs.org) 18+ and npm.
-
-```bash
-cd apticrack
-npm install
-npm run dev
-```
-
-Open the URL Vite prints (usually `http://localhost:5173`). That's it — no environment variables, no API keys, no database.
-
-Other useful commands:
-
-```bash
-npm run build     # production build -> dist/
-npm run preview   # serve the production build locally
-npm test          # run the test suite (Vitest)
-```
-
-The first time you open the app with no saved data, it loads **sample data** — a demo plan that "started" three weeks ago with realistic progress, so you can see every feature working immediately. A banner at the top says so. Click **"Clear sample data"** whenever you're ready to start your real plan (your settings — name, theme, dates — carry over).
-
----
-
-## 2. Changing the 12-week plan
+## 1. Changing the 12-week plan
 
 The week-by-week curriculum (which topics/tests happen on which week, in what phase) lives in:
 
@@ -42,7 +19,7 @@ Each entry is one week: `{ week, phase, title, focus, exam: {q, l, v, pct}, bloc
 
 The plan's *timing* logic (how many weeks, how days are split into learn/practice/review/revise tasks, how questions-per-day are distributed) is in `src/lib/planGenerator.js`. `TOTAL_WEEKS` in `src/lib/constants.js` controls the plan length (default 12).
 
-## 3. Changing daily study duration
+## 2. Changing daily study duration
 
 Go to **Settings → Daily targets**:
 - **Daily study time (minutes)** — total time per day (default 120 = 2 hours)
@@ -51,20 +28,13 @@ Go to **Settings → Daily targets**:
 
 Changing these **rescales all your upcoming (not-yet-done) tasks** automatically; anything already completed stays untouched. You can also change the default for brand-new plans by editing `DEFAULT_SETTINGS` in `src/lib/constants.js`.
 
-## 4. Adding/removing topics
+## 3. Adding/removing topics
 
 Use the **Topics** page in the app — "Add topic" lets you add one to any section; opening a topic and clicking "Remove" deletes it (any of your completed history is kept; only untouched future tasks for that topic are removed).
 
 To change the *starting* topic list (what a brand-new plan is seeded with), edit `DEFAULT_TOPICS` in `src/lib/topics.js`. Note: topics added from the UI aren't automatically scheduled into the week-by-week plan — add tasks for them manually from the Daily tracker, or fold them into `CURRICULUM` and regenerate the plan.
 
 ## 5. Deployment
-
-AptiCrack is a fully static site — `npm run build` produces a `dist/` folder you can host anywhere (Netlify, Vercel, GitHub Pages, S3, etc.). `vite.config.js` sets `base: './'` so it also works fine hosted in a subfolder/subpath, not just at a domain root.
-
-```bash
-npm run build
-# upload the contents of dist/ to your static host
-```
 
 Because everything is stored in `localStorage`, each browser/device has its own independent copy of the data — there's nothing to configure server-side, and no accounts to manage. Use **Settings → Export backup** to move your data between devices or browsers (download a `.json` file, then **Import backup** on the other one).
 
