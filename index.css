@@ -1,0 +1,127 @@
+@import 'tailwindcss';
+
+/* ---------- Tailwind theme: map utility names to CSS variables ---------- */
+@theme inline {
+  --font-sans: 'Nunito Sans', ui-rounded, 'SF Pro Rounded', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-display: 'Bricolage Grotesque', 'Nunito Sans', ui-rounded, system-ui, sans-serif;
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface2: var(--surface2);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-accent: var(--accent);
+  --color-accent-soft: var(--accent-soft);
+  --color-accent-ink: var(--accent-ink);
+  --color-accent-on: var(--accent-on);
+  --shadow-card: var(--shadow);
+  --shadow-pop: var(--shadow-hover);
+}
+
+/* ---------- Design tokens ----------
+   Every colour in the app comes from here. Change a value once and it updates everywhere.
+   Each "tone" has three parts: solid (bars, dots), soft (badge background), ink (badge text). */
+:root {
+  --bg: #fff7ee;
+  --surface: #ffffff;
+  --surface2: #fff2e4;
+  --ink: #2a2733;
+  --muted: #6a6577;
+  --line: #f0e2d3;
+  --shadow: 0 1px 2px rgba(80, 50, 30, 0.05), 0 10px 26px -14px rgba(80, 50, 30, 0.2);
+  --shadow-hover: 0 2px 4px rgba(80, 50, 30, 0.06), 0 18px 34px -14px rgba(80, 50, 30, 0.3);
+
+  /* accent (buttons, links, active nav): coral by default */
+  --accent: #cf4530;
+  --accent-soft: #ffe4dc;
+  --accent-ink: #9f2d1b;
+  --accent-on: #ffffff;
+
+  /* section colours */
+  --quant: #ff7f6b;   --quant-soft: #ffe3dc;   --quant-ink: #a63421;
+  --logic: #4da6e8;   --logic-soft: #ddf0ff;   --logic-ink: #155e96;
+  --verbal: #9b87f5;  --verbal-soft: #eae4ff;  --verbal-ink: #573fc4;
+  --mixed: #8a97ad;   --mixed-soft: #e6eaf1;   --mixed-ink: #3f4b61;
+  /* status colours */
+  --done: #4cc38a;    --done-soft: #d9f6e7;    --done-ink: #116a45;
+  --pending: #ffa36b; --pending-soft: #ffe7d5; --pending-ink: #96460f;
+  --progress: #2bb3c0; --progress-soft: #d5f4f6; --progress-ink: #0f6470;
+  --revise: #f272a8;  --revise-soft: #ffe1ee;  --revise-ink: #98255e;
+  --exam: #f6c945;    --exam-soft: #fff3c2;    --exam-ink: #725300;
+  --overdue: #e5484d; --overdue-soft: #ffe2e3; --overdue-ink: #9e1c21;
+  --skip: #a9a4b5;    --skip-soft: #eceaf1;    --skip-ink: #55506a;
+}
+
+.dark {
+  --bg: #16141d;
+  --surface: #201d2a;
+  --surface2: #292536;
+  --ink: #f4f1fa;
+  --muted: #b0aac0;
+  --line: #342f44;
+  --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 10px 26px -14px rgba(0, 0, 0, 0.6);
+  --shadow-hover: 0 2px 4px rgba(0, 0, 0, 0.35), 0 18px 34px -14px rgba(0, 0, 0, 0.7);
+
+  --accent: #ff8a76;
+  --accent-soft: rgba(255, 138, 118, 0.18);
+  --accent-ink: #ffb9ac;
+  --accent-on: #2b1410;
+
+  --quant-soft: rgba(255, 127, 107, 0.18);   --quant-ink: #ffb3a6;
+  --logic-soft: rgba(77, 166, 232, 0.2);     --logic-ink: #9fd3ff;
+  --verbal-soft: rgba(155, 135, 245, 0.2);   --verbal-ink: #cfc4ff;
+  --mixed-soft: rgba(138, 151, 173, 0.22);   --mixed-ink: #cfd6e4;
+  --done-soft: rgba(76, 195, 138, 0.2);      --done-ink: #8ce6bb;
+  --pending-soft: rgba(255, 163, 107, 0.2);  --pending-ink: #ffc9a3;
+  --progress-soft: rgba(43, 179, 192, 0.2);  --progress-ink: #8fe3ec;
+  --revise-soft: rgba(242, 114, 168, 0.2);   --revise-ink: #ffb4d2;
+  --exam-soft: rgba(246, 201, 69, 0.2);      --exam-ink: #ffe28a;
+  --overdue-soft: rgba(229, 72, 77, 0.22);   --overdue-ink: #ffaeb1;
+  --skip-soft: rgba(169, 164, 181, 0.2);     --skip-ink: #d6d2e0;
+}
+
+/* accent themes (Settings > Appearance). Later rules win over the defaults above. */
+[data-accent='lavender'] { --accent: #6a4fe0; --accent-soft: #eae4ff; --accent-ink: #4a31b8; --accent-on: #fff; }
+[data-accent='sky'] { --accent: #1e77bf; --accent-soft: #ddf0ff; --accent-ink: #135b96; --accent-on: #fff; }
+[data-accent='mint'] { --accent: #14855d; --accent-soft: #d9f6e7; --accent-ink: #0d6847; --accent-on: #fff; }
+html.dark[data-accent='coral'] { --accent: #ff8a76; --accent-soft: rgba(255, 138, 118, 0.18); --accent-ink: #ffb9ac; --accent-on: #2b1410; }
+html.dark[data-accent='lavender'] { --accent: #b5a6ff; --accent-soft: rgba(181, 166, 255, 0.2); --accent-ink: #d7ceff; --accent-on: #1c1540; }
+html.dark[data-accent='sky'] { --accent: #7cc4ff; --accent-soft: rgba(124, 196, 255, 0.2); --accent-ink: #b6dfff; --accent-on: #0b2238; }
+html.dark[data-accent='mint'] { --accent: #62d9a6; --accent-soft: rgba(98, 217, 166, 0.2); --accent-ink: #9df0c9; --accent-on: #0a2a1d; }
+
+/* ---------- Base ---------- */
+html { color-scheme: light; }
+html.dark { color-scheme: dark; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+h1, h2, h3, .font-display { font-family: var(--font-display); letter-spacing: -0.01em; }
+:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; border-radius: 10px; }
+button, [role='button'], select, summary { cursor: pointer; }
+button:disabled { cursor: not-allowed; opacity: 0.55; }
+input[type='date'], input[type='number'], input[type='text'], select, textarea { color-scheme: inherit; }
+
+/* one deliberate motion: the page fades in when you switch views */
+@keyframes view-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+.view-in { animation: view-in 0.28s ease-out both; }
+@keyframes pop { 0% { transform: scale(0.8); } 60% { transform: scale(1.12); } 100% { transform: scale(1); } }
+.pop { animation: pop 0.25s ease-out; }
+@keyframes drift { 0%, 100% { transform: translateY(0) rotate(0); } 50% { transform: translateY(-8px) rotate(3deg); } }
+.drift { animation: drift 7s ease-in-out infinite; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+}
+
+/* thin scrollbars for the horizontally scrollable bits */
+.thin-scroll::-webkit-scrollbar { height: 6px; width: 6px; }
+.thin-scroll::-webkit-scrollbar-thumb { background: var(--line); border-radius: 99px; }
+
+/* Recharts: keep tooltip and legend text readable in both themes */
+.recharts-default-tooltip { background: var(--surface) !important; border-color: var(--line) !important; border-radius: 14px !important; }
+.recharts-tooltip-label, .recharts-tooltip-item { color: var(--ink) !important; }
